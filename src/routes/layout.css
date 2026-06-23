@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* ------------------------------------------------------------------ *
+ * Design tokens — dark canvas + colorful bento cards (UtilsLab theme)
+ * ------------------------------------------------------------------ */
+@theme {
+	/* Surfaces */
+	--color-canvas: #0b0b0c;
+	--color-surface: #161618;
+	--color-surface-2: #1f1f22;
+	--color-border: #2a2a2e;
+
+	/* Text */
+	--color-ink: #f5f5f4;
+	--color-ink-muted: #a1a1aa;
+
+	/* Category accents */
+	--color-financial: #c8755a;
+	--color-financial-ink: #2a1610;
+	--color-health: #9b7ec8;
+	--color-health-ink: #1c1430;
+	--color-math: #7fa67c;
+	--color-math-ink: #11210f;
+	--color-other: #d9b85c;
+	--color-other-ink: #2a2010;
+
+	/* Brand accent — olive */
+	--color-brand: #a8b545;
+	--color-brand-ink: #1a1d08;
+
+	/* Radii */
+	--radius-card: 1.75rem;
+
+	/* Type */
+	--font-sans:
+		'Inter Tight', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--font-display: 'Sora', var(--font-sans);
+	--font-mono: 'Geist Mono', ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+}
+
+@layer base {
+	html {
+		background-color: var(--color-canvas);
+		color: var(--color-ink);
+		font-family: var(--font-sans);
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+	}
+
+	body {
+		min-height: 100dvh;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		font-family: var(--font-display);
+		letter-spacing: -0.02em;
+	}
+
+	::selection {
+		background-color: color-mix(in srgb, var(--color-brand) 40%, transparent);
+	}
+
+	/* Thin, dark-friendly scrollbars */
+	* {
+		scrollbar-width: thin;
+		scrollbar-color: var(--color-border) transparent;
+	}
+}

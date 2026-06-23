@@ -1,0 +1,72 @@
+<script lang="ts">
+	import { resolve } from '$app/paths';
+	import { CATEGORY_ORDER, categoryTheme } from '$lib/theme';
+	import { toolsByCategory, featuredTools } from '$lib/tools/registry';
+	import BentoCard from '$lib/components/BentoCard.svelte';
+	import CategoryIcon from '$lib/components/CategoryIcon.svelte';
+
+	const featured = featuredTools();
+	// First category gets the hero footprint, the rest are standard tiles.
+	const sizes = ['hero', 'sm', 'wide', 'sm'] as const;
+</script>
+
+<svelte:head>
+	<title>UtilsLab — Modern Calculators for Everyday Life</title>
+	<meta
+		name="description"
+		content="A beautiful, free collection of financial, health, math, and everyday calculators."
+	/>
+</svelte:head>
+
+<section class="mb-10">
+	<h1 class="max-w-2xl text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
+		Every calculator,<br /><span class="text-brand">beautifully simple.</span>
+	</h1>
+	<p class="mt-4 max-w-xl text-lg text-ink-muted">
+		Fast, free, and ad-light tools for money, health, math, and daily life. Press
+		<kbd class="rounded border border-border px-1.5 font-mono text-sm">⌘K</kbd> to search.
+	</p>
+</section>
+
+<!-- Category bento -->
+<section class="mb-12">
+	<div class="grid auto-rows-[minmax(150px,auto)] grid-cols-1 gap-4 sm:grid-cols-3">
+		{#each CATEGORY_ORDER as id, i (id)}
+			{@const theme = categoryTheme(id)}
+			{@const count = toolsByCategory(id).length}
+			<BentoCard
+				href={resolve('/[category=category]', { category: id })}
+				colorClass={theme.bg}
+				inkClass={theme.ink}
+				size={sizes[i]}
+			>
+				<CategoryIcon category={id} class="size-7 opacity-90" />
+				<div class="mt-auto">
+					<h2 class="text-2xl font-bold">{theme.name}</h2>
+					<p class="mt-1 max-w-xs text-sm opacity-80">{theme.tagline}</p>
+					<p class="mt-3 text-sm font-medium opacity-70">{count} calculators →</p>
+				</div>
+			</BentoCard>
+		{/each}
+	</div>
+</section>
+
+<!-- Popular -->
+<section>
+	<h2 class="mb-4 text-sm font-semibold uppercase tracking-wide text-ink-muted">Popular</h2>
+	<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+		{#each featured as calc (calc.slug)}
+			{@const theme = categoryTheme(calc.category)}
+			<BentoCard
+				href={resolve('/tools/[slug]', { slug: calc.slug })}
+				colorClass="bg-surface"
+				inkClass="text-ink"
+			>
+				<span class="grid size-10 place-items-center rounded-xl {theme.soft} {theme.text}">
+					<CategoryIcon category={calc.category} class="size-5" />
+				</span>
+				<h3 class="mt-4 font-semibold leading-snug">{calc.title}</h3>
+			</BentoCard>
+		{/each}
+	</div>
+</section>
