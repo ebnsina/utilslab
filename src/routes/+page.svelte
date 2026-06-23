@@ -8,7 +8,7 @@
 
 	const featured = featuredTools();
 	// First category gets the hero footprint, the rest are standard tiles.
-	const sizes = ['hero', 'sm', 'wide', 'sm'] as const;
+	const sizes = ['hero', 'sm', 'wide', 'sm', 'wide'] as const;
 </script>
 
 <svelte:head>

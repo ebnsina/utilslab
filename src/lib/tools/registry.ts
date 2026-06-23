@@ -17,6 +17,11 @@ import { fraction } from './fraction';
 // Everyday
 import { age } from './age';
 import { tip } from './tip';
+// Developer
+import { base64EncodeTool, base64DecodeTool } from './base64';
+import { urlEncodeTool, urlDecodeTool } from './url';
+import { jsonBeautifyTool, jsonMinifyTool } from './json';
+import { cssMinifyTool, cssBeautifyTool } from './css';
 
 /** The complete catalog. Adding a calculator = import + append here. */
 export const TOOLS: Tool[] = [
@@ -32,7 +37,15 @@ export const TOOLS: Tool[] = [
 	percentage,
 	fraction,
 	age,
-	tip
+	tip,
+	base64EncodeTool,
+	base64DecodeTool,
+	urlEncodeTool,
+	urlDecodeTool,
+	jsonBeautifyTool,
+	jsonMinifyTool,
+	cssMinifyTool,
+	cssBeautifyTool
 ];
 
 const BY_SLUG = new Map(TOOLS.map((c) => [c.slug, c]));

@@ -48,10 +48,19 @@ export const CATEGORIES: Record<CategoryId, CategoryTheme> = {
 		ink: 'text-other-ink',
 		soft: 'bg-other/15',
 		text: 'text-other'
+	},
+	developer: {
+		id: 'developer',
+		name: 'Developer',
+		tagline: 'Encoders, formatters & text tools',
+		bg: 'bg-developer',
+		ink: 'text-developer-ink',
+		soft: 'bg-developer/15',
+		text: 'text-developer'
 	}
 };
 
-export const CATEGORY_ORDER: CategoryId[] = ['financial', 'health', 'math', 'other'];
+export const CATEGORY_ORDER: CategoryId[] = ['financial', 'health', 'math', 'other', 'developer'];
 
 export function categoryTheme(id: CategoryId): CategoryTheme {
 	return CATEGORIES[id];

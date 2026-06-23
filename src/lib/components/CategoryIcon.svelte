@@ -4,6 +4,7 @@
 	import HeartPulse from '@lucide/svelte/icons/heart-pulse';
 	import Sigma from '@lucide/svelte/icons/sigma';
 	import Wrench from '@lucide/svelte/icons/wrench';
+	import Code from '@lucide/svelte/icons/code';
 
 	let { category, class: klass = 'size-6' }: { category: CategoryId; class?: string } = $props();
 
@@ -11,7 +12,8 @@
 		financial: Landmark,
 		health: HeartPulse,
 		math: Sigma,
-		other: Wrench
+		other: Wrench,
+		developer: Code
 	};
 
 	const Icon = $derived(ICONS[category]);

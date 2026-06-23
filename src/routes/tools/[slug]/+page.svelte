@@ -3,6 +3,7 @@
 	import { getTool } from '$lib/tools/registry';
 	import { categoryTheme } from '$lib/theme';
 	import ToolShell from '$lib/components/ToolShell.svelte';
+	import TextTool from '$lib/components/TextTool.svelte';
 	import ToolIcon from '$lib/components/ToolIcon.svelte';
 	import type { PageData } from './$types';
 
@@ -42,6 +43,8 @@
 {#key data.slug}
 	{#if Custom}
 		<Custom />
+	{:else if tool.transform}
+		<TextTool {tool} />
 	{:else}
 		<ToolShell def={tool} />
 	{/if}

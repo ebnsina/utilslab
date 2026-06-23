@@ -18,6 +18,15 @@
 	import HeartPulse from '@lucide/svelte/icons/heart-pulse';
 	import Sigma from '@lucide/svelte/icons/sigma';
 	import Wrench from '@lucide/svelte/icons/wrench';
+	import Code from '@lucide/svelte/icons/code';
+	import Binary from '@lucide/svelte/icons/binary';
+	import FileText from '@lucide/svelte/icons/file-text';
+	import Link from '@lucide/svelte/icons/link';
+	import Unlink from '@lucide/svelte/icons/unlink';
+	import Braces from '@lucide/svelte/icons/braces';
+	import FileJson from '@lucide/svelte/icons/file-json';
+	import Minimize2 from '@lucide/svelte/icons/minimize-2';
+	import Palette from '@lucide/svelte/icons/palette';
 
 	// A distinct Lucide icon per tool, with a per-category fallback so new
 	// tools always render something sensible.
@@ -34,14 +43,23 @@
 		percentage: Percent,
 		fraction: Divide,
 		age: Cake,
-		tip: Coins
+		tip: Coins,
+		'base64-encode': Binary,
+		'base64-decode': FileText,
+		'url-encode': Link,
+		'url-decode': Unlink,
+		'json-beautify': Braces,
+		'json-minify': FileJson,
+		'css-minify': Minimize2,
+		'css-beautify': Palette
 	};
 
 	const CATEGORY_FALLBACK: Record<CategoryId, typeof House> = {
 		financial: Landmark,
 		health: HeartPulse,
 		math: Sigma,
-		other: Wrench
+		other: Wrench,
+		developer: Code
 	};
 
 	let {
