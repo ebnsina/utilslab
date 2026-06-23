@@ -23,7 +23,7 @@
 	const blocks = $derived(results.filter((r) => r.kind !== 'stat'));
 </script>
 
-<div class="grid gap-6 lg:grid-cols-[minmax(0,360px)_1fr]">
+<div class="grid items-start gap-6 lg:grid-cols-[minmax(0,360px)_1fr]">
 	<!-- Inputs -->
 	<section class="rounded-card border border-border bg-surface p-5 sm:p-6">
 		<h2 class="tag mb-4 text-sm {theme.text}">Inputs</h2>
