@@ -22,6 +22,10 @@
 		}
 	});
 
+	// Help avoid "is it broken?" confusion when a transform is a no-op
+	// (e.g. decoding text that wasn't encoded in the first place).
+	const unchanged = $derived(!result.error && result.output !== '' && result.output === input);
+
 	async function copy() {
 		if (!result.output) return;
 		await navigator.clipboard.writeText(result.output);
@@ -80,6 +84,11 @@
 				value={result.output}
 				placeholder="Result appears here…"
 				class="{fieldClass} placeholder:text-ink-muted/50"></textarea>
+			{#if unchanged}
+				<p class="mt-2 text-xs text-ink-muted">
+					Output matches the input — there was nothing to change.
+				</p>
+			{/if}
 		{/if}
 	</section>
 </div>
