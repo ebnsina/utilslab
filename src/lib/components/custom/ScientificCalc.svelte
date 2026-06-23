@@ -84,7 +84,9 @@
 
 <div class="mx-auto max-w-md rounded-card border border-border bg-surface p-4 sm:p-5">
 	<!-- Display -->
-	<div class="mb-4 rounded-2xl border border-border bg-canvas p-4 text-right">
+	<div
+		class="mb-4 rounded-2xl border border-line bg-canvas p-4 text-right transition focus-within:ring-2 focus-within:ring-brand focus-within:ring-offset-2 focus-within:ring-offset-surface"
+	>
 		<input
 			bind:value={expr}
 			onkeydown={(e) => e.key === 'Enter' && equals()}

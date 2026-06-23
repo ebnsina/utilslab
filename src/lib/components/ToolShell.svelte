@@ -26,7 +26,7 @@
 <div class="grid gap-6 lg:grid-cols-[minmax(0,360px)_1fr]">
 	<!-- Inputs -->
 	<section class="rounded-card border border-border bg-surface p-5 sm:p-6">
-		<h2 class="mb-4 text-sm font-semibold uppercase tracking-wide {theme.text}">Inputs</h2>
+		<h2 class="tag mb-4 text-sm {theme.text}">Inputs</h2>
 		<div class="space-y-4">
 			{#each def.fields ?? [] as field (field.name)}
 				<Field {field} bind:value={inputs[field.name]} />
@@ -36,7 +36,7 @@
 
 	<!-- Results -->
 	<section class="rounded-card border border-border bg-surface p-5 sm:p-6">
-		<h2 class="mb-4 text-sm font-semibold uppercase tracking-wide {theme.text}">Results</h2>
+		<h2 class="tag mb-4 text-sm {theme.text}">Results</h2>
 
 		<div class="grid gap-3 sm:grid-cols-2">
 			{#each stats as result, i (i)}

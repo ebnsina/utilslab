@@ -14,7 +14,7 @@
 			<select
 				{id}
 				bind:value
-				class="w-full appearance-none rounded-xl border border-border bg-surface-2 px-3.5 py-2.5 text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/30"
+				class="w-full appearance-none rounded-xl border border-line bg-surface-2 px-3.5 py-2.5 text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-surface"
 			>
 				{#each field.options ?? [] as opt (opt.value)}
 					<option value={opt.value}>{opt.label}</option>
@@ -34,7 +34,7 @@
 				{id}
 				type="date"
 				bind:value
-				class="w-full rounded-xl border border-border bg-surface-2 px-3.5 py-2.5 text-ink outline-none transition [color-scheme:dark] focus:border-brand focus:ring-2 focus:ring-brand/30"
+				class="w-full rounded-xl border border-line bg-surface-2 px-3.5 py-2.5 text-ink outline-none transition [color-scheme:dark] focus:border-brand focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-surface"
 			/>
 		{:else}
 			<input
@@ -45,7 +45,7 @@
 				max={field.max}
 				step={field.step ?? 'any'}
 				inputmode="decimal"
-				class="w-full rounded-xl border border-border bg-surface-2 px-3.5 py-2.5 font-mono tabular-nums text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/30"
+				class="w-full rounded-xl border border-line bg-surface-2 px-3.5 py-2.5 font-mono tabular-nums text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-surface"
 				class:pr-12={field.unit}
 			/>
 			{#if field.unit}

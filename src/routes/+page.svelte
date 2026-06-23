@@ -56,7 +56,7 @@
 
 <!-- Popular -->
 <section>
-	<h2 class="mb-4 text-sm font-semibold uppercase tracking-wide text-ink-muted">Popular</h2>
+	<h2 class="tag mb-4 text-sm text-ink-muted">Popular</h2>
 	<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
 		{#each featured as calc (calc.slug)}
 			<ToolCard tool={calc} />

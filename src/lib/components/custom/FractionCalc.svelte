@@ -18,7 +18,7 @@
 	const decimal = $derived(result.denominator ? result.numerator / result.denominator : NaN);
 
 	const inputClass =
-		'w-16 rounded-lg border border-border bg-surface-2 px-2 py-1.5 text-center font-mono text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/30';
+		'w-16 rounded-lg border border-line bg-surface-2 px-2 py-1.5 text-center font-mono text-ink outline-none transition focus:border-brand focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-surface';
 </script>
 
 {#snippet fraction(f: { n: number; d: number })}
@@ -36,7 +36,7 @@
 		<select
 			bind:value={op}
 			aria-label="Operation"
-			class="rounded-lg border border-border bg-surface-2 px-3 py-2 text-xl text-brand outline-none focus:border-brand"
+			class="rounded-lg border border-line bg-surface-2 px-3 py-2 text-xl text-brand outline-none transition focus:border-brand focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-surface"
 		>
 			{#each ops as o (o.value)}
 				<option value={o.value}>{o.symbol}</option>

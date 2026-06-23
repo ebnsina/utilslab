@@ -15,6 +15,9 @@
 	--color-ink: #f5f5f4;
 	--color-ink-muted: #a1a1aa;
 
+	/* Light-gray border used on form inputs. */
+	--color-line: #9ca3af;
+
 	/* Category accents */
 	--color-financial: #c8755a;
 	--color-financial-ink: #2a1610;
@@ -31,6 +34,11 @@
 
 	/* Radii */
 	--radius-card: 1.75rem;
+	--radius-badge: 0.625rem;
+
+	/* Corner shape — superellipse "squircle" corners, driven by one var so the
+	   whole UI stays consistent and can be toggled in a single place. */
+	--corner-shape: squircle;
 
 	/* Type */
 	--font-sans:
@@ -68,5 +76,21 @@
 	* {
 		scrollbar-width: thin;
 		scrollbar-color: var(--color-border) transparent;
+	}
+
+	/* Squircle corners wherever we round something. :where() keeps specificity
+	   at 0 so component styles win; unsupported browsers fall back to the plain
+	   rounded corners with no visual breakage. */
+	:where(button, a, input, select, textarea, [class*='rounded']) {
+		corner-shape: var(--corner-shape);
+	}
+}
+
+@layer components {
+	/* Uppercase, tightly-tracked label used for tags / badges / section eyebrows. */
+	.tag {
+		text-transform: uppercase;
+		letter-spacing: -0.02em;
+		font-weight: 600;
 	}
 }

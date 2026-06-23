@@ -70,7 +70,7 @@
 				bind:value={query}
 				onkeydown={onInputKeydown}
 				placeholder="Search tools…"
-				class="w-full border-b border-border bg-transparent px-5 py-4 text-ink outline-none placeholder:text-ink-muted"
+				class="w-full border-b border-line bg-transparent px-5 py-4 text-ink outline-none placeholder:text-ink-muted"
 			/>
 			<ul class="max-h-80 overflow-y-auto p-2">
 				{#each results as calc, i (calc.slug)}

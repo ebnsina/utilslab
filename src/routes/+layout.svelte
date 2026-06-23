@@ -62,7 +62,7 @@
 					{@const theme = categoryTheme(id)}
 					<a
 						href={resolve('/[category=category]', { category: id })}
-						class="rounded-full px-3 py-1.5 text-sm font-medium transition hover:-translate-y-0.5 {theme.soft} {theme.text}"
+						class="tag rounded-badge px-3 py-1.5 text-xs transition hover:-translate-y-0.5 {theme.soft} {theme.text}"
 					>
 						{theme.name}
 					</a>
