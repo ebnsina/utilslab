@@ -3,7 +3,7 @@
 	import { getTool } from '$lib/tools/registry';
 	import { categoryTheme } from '$lib/theme';
 	import ToolShell from '$lib/components/ToolShell.svelte';
-	import CategoryIcon from '$lib/components/CategoryIcon.svelte';
+	import ToolIcon from '$lib/components/ToolIcon.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -30,8 +30,8 @@
 </nav>
 
 <header class="mb-8 flex items-start gap-4">
-	<span class="grid size-12 shrink-0 place-items-center rounded-2xl {theme.soft} {theme.text}">
-		<CategoryIcon category={data.category} class="size-6" />
+	<span class="grid size-12 shrink-0 place-items-center rounded-2xl {theme.bg} {theme.ink}">
+		<ToolIcon slug={tool.slug} category={data.category} class="size-6" />
 	</span>
 	<div class="min-w-0">
 		<h1 class="text-2xl font-bold tracking-tight sm:text-4xl">{tool.title}</h1>

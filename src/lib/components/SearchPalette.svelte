@@ -4,7 +4,7 @@
 	import { fade, scale } from 'svelte/transition';
 	import { searchTools } from '$lib/tools/registry';
 	import { categoryTheme } from '$lib/theme';
-	import CategoryIcon from './CategoryIcon.svelte';
+	import ToolIcon from './ToolIcon.svelte';
 
 	let open = $state(false);
 	let query = $state('');
@@ -69,7 +69,7 @@
 				autofocus
 				bind:value={query}
 				onkeydown={onInputKeydown}
-				placeholder="Search calculators…"
+				placeholder="Search tools…"
 				class="w-full border-b border-border bg-transparent px-5 py-4 text-ink outline-none placeholder:text-ink-muted"
 			/>
 			<ul class="max-h-80 overflow-y-auto p-2">
@@ -85,7 +85,7 @@
 								: ''}"
 						>
 							<span class="grid size-9 place-items-center rounded-lg {theme.soft} {theme.text}">
-								<CategoryIcon category={calc.category} class="size-4" />
+								<ToolIcon slug={calc.slug} category={calc.category} class="size-4" />
 							</span>
 							<span class="min-w-0">
 								<span class="block truncate font-medium text-ink">{calc.title}</span>
@@ -94,7 +94,7 @@
 						</button>
 					</li>
 				{:else}
-					<li class="px-4 py-6 text-center text-sm text-ink-muted">No calculators found.</li>
+					<li class="px-4 py-6 text-center text-sm text-ink-muted">No tools found.</li>
 				{/each}
 			</ul>
 		</div>

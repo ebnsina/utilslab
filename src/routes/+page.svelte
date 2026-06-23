@@ -4,6 +4,7 @@
 	import { toolsByCategory, featuredTools } from '$lib/tools/registry';
 	import BentoCard from '$lib/components/BentoCard.svelte';
 	import CategoryIcon from '$lib/components/CategoryIcon.svelte';
+	import ToolCard from '$lib/components/ToolCard.svelte';
 
 	const featured = featuredTools();
 	// First category gets the hero footprint, the rest are standard tiles.
@@ -11,16 +12,16 @@
 </script>
 
 <svelte:head>
-	<title>UtilsLab — Modern Calculators for Everyday Life</title>
+	<title>UtilsLab — Modern Tools for Everyday Life</title>
 	<meta
 		name="description"
-		content="A beautiful, free collection of financial, health, math, and everyday calculators."
+		content="A beautiful, free collection of financial, health, math, and everyday tools."
 	/>
 </svelte:head>
 
 <section class="mb-10">
 	<h1 class="max-w-2xl text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
-		Every calculator,<br /><span class="text-brand">beautifully simple.</span>
+		Every tool,<br /><span class="text-brand">beautifully simple.</span>
 	</h1>
 	<p class="mt-4 max-w-xl text-lg text-ink-muted">
 		Fast, free, and ad-light tools for money, health, math, and daily life. Press
@@ -46,7 +47,7 @@
 				<div class="mt-auto">
 					<h2 class="text-2xl font-bold">{theme.name}</h2>
 					<p class="mt-1 max-w-xs text-sm opacity-80">{theme.tagline}</p>
-					<p class="mt-3 text-sm font-medium opacity-70">{count} calculators →</p>
+					<p class="mt-3 text-sm font-medium opacity-70">{count} tools →</p>
 				</div>
 			</BentoCard>
 		{/each}
@@ -58,17 +59,7 @@
 	<h2 class="mb-4 text-sm font-semibold uppercase tracking-wide text-ink-muted">Popular</h2>
 	<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
 		{#each featured as calc (calc.slug)}
-			{@const theme = categoryTheme(calc.category)}
-			<BentoCard
-				href={resolve('/tools/[slug]', { slug: calc.slug })}
-				colorClass="bg-surface"
-				inkClass="text-ink"
-			>
-				<span class="grid size-10 place-items-center rounded-xl {theme.soft} {theme.text}">
-					<CategoryIcon category={calc.category} class="size-5" />
-				</span>
-				<h3 class="mt-4 font-semibold leading-snug">{calc.title}</h3>
-			</BentoCard>
+			<ToolCard tool={calc} />
 		{/each}
 	</div>
 </section>
