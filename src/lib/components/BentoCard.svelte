@@ -20,9 +20,10 @@
 
 	const span: Record<string, string> = {
 		sm: '',
-		wide: 'sm:col-span-2',
+		wide: 'col-span-2 sm:col-span-2',
 		tall: 'sm:row-span-2',
-		hero: 'sm:col-span-2 sm:row-span-2'
+		// Full-width on phones, then a 2×2 hero tile from `sm` up.
+		hero: 'col-span-2 sm:row-span-2'
 	};
 </script>
 

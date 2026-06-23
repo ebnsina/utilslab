@@ -33,8 +33,8 @@
 	<span class="grid size-12 shrink-0 place-items-center rounded-2xl {theme.soft} {theme.text}">
 		<CategoryIcon category={data.category} class="size-6" />
 	</span>
-	<div>
-		<h1 class="text-3xl font-bold tracking-tight sm:text-4xl">{tool.title}</h1>
+	<div class="min-w-0">
+		<h1 class="text-2xl font-bold tracking-tight sm:text-4xl">{tool.title}</h1>
 		<p class="mt-1 max-w-2xl text-ink-muted">{tool.description}</p>
 	</div>
 </header>

@@ -30,7 +30,9 @@
 
 <!-- Category bento -->
 <section class="mb-12">
-	<div class="grid auto-rows-[minmax(150px,auto)] grid-cols-1 gap-4 sm:grid-cols-3">
+	<div
+		class="grid auto-rows-[minmax(140px,auto)] grid-flow-row-dense grid-cols-2 gap-4 sm:grid-cols-3"
+	>
 		{#each CATEGORY_ORDER as id, i (id)}
 			{@const theme = categoryTheme(id)}
 			{@const count = toolsByCategory(id).length}

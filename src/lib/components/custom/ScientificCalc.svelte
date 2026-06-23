@@ -82,7 +82,7 @@
 	}
 </script>
 
-<div class="mx-auto max-w-md rounded-card border border-border bg-surface p-5">
+<div class="mx-auto max-w-md rounded-card border border-border bg-surface p-4 sm:p-5">
 	<!-- Display -->
 	<div class="mb-4 rounded-2xl border border-border bg-canvas p-4 text-right">
 		<input
@@ -98,11 +98,11 @@
 	</div>
 
 	<!-- Keypad -->
-	<div class="grid grid-cols-5 gap-2">
+	<div class="grid grid-cols-5 gap-1.5 sm:gap-2">
 		{#each keys as key (key.label)}
 			<button
 				onclick={() => handle(key)}
-				class="h-12 rounded-xl font-medium transition active:scale-95 hover:brightness-125 {styleFor(
+				class="h-11 rounded-xl font-medium transition active:scale-95 hover:brightness-125 sm:h-12 {styleFor(
 					key
 				)}"
 			>
