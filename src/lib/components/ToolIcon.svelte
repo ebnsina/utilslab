@@ -27,6 +27,12 @@
 	import FileJson from '@lucide/svelte/icons/file-json';
 	import Minimize2 from '@lucide/svelte/icons/minimize-2';
 	import Palette from '@lucide/svelte/icons/palette';
+	import Hash from '@lucide/svelte/icons/hash';
+	import KeyRound from '@lucide/svelte/icons/key-round';
+	import Fingerprint from '@lucide/svelte/icons/fingerprint';
+	import Clock from '@lucide/svelte/icons/clock';
+	import Pipette from '@lucide/svelte/icons/pipette';
+	import Ruler from '@lucide/svelte/icons/ruler';
 
 	// A distinct Lucide icon per tool, with a per-category fallback so new
 	// tools always render something sensible.
@@ -51,7 +57,13 @@
 		'json-beautify': Braces,
 		'json-minify': FileJson,
 		'css-minify': Minimize2,
-		'css-beautify': Palette
+		'css-beautify': Palette,
+		'hash-generator': Hash,
+		'jwt-decoder': KeyRound,
+		'uuid-generator': Fingerprint,
+		'timestamp-converter': Clock,
+		'color-converter': Pipette,
+		'unit-converter': Ruler
 	};
 
 	const CATEGORY_FALLBACK: Record<CategoryId, typeof House> = {

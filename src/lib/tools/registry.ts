@@ -22,6 +22,12 @@ import { base64EncodeTool, base64DecodeTool } from './base64';
 import { urlEncodeTool, urlDecodeTool } from './url';
 import { jsonBeautifyTool, jsonMinifyTool } from './json';
 import { cssMinifyTool, cssBeautifyTool } from './css';
+import { hashTool } from './hash';
+import { jwtTool } from './jwt';
+import { uuid } from './uuid';
+import { timestamp } from './timestamp';
+import { color } from './color';
+import { unit } from './unit';
 
 /** The complete catalog. Adding a calculator = import + append here. */
 export const TOOLS: Tool[] = [
@@ -45,7 +51,13 @@ export const TOOLS: Tool[] = [
 	jsonBeautifyTool,
 	jsonMinifyTool,
 	cssMinifyTool,
-	cssBeautifyTool
+	cssBeautifyTool,
+	hashTool,
+	jwtTool,
+	uuid,
+	timestamp,
+	color,
+	unit
 ];
 
 const BY_SLUG = new Map(TOOLS.map((c) => [c.slug, c]));

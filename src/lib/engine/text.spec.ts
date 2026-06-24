@@ -7,7 +7,9 @@ import {
 	jsonBeautify,
 	jsonMinify,
 	cssMinify,
-	cssBeautify
+	cssBeautify,
+	jwtDecode,
+	hashAll
 } from './text';
 
 describe('base64', () => {
@@ -55,5 +57,26 @@ describe('css', () => {
 		expect(out).toContain('.a {');
 		expect(out).toContain('color:red;');
 		expect(out.trim().endsWith('}')).toBe(true);
+	});
+});
+
+describe('jwt', () => {
+	it('decodes header and payload', () => {
+		// {"alg":"HS256","typ":"JWT"} . {"sub":"123","name":"Jo"} . sig
+		const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMiLCJuYW1lIjoiSm8ifQ.sig';
+		const out = jwtDecode(token);
+		expect(out).toContain('"alg": "HS256"');
+		expect(out).toContain('"name": "Jo"');
+	});
+	it('throws on a non-token', () => {
+		expect(() => jwtDecode('not-a-jwt')).toThrow();
+	});
+});
+
+describe('hash', () => {
+	it('computes a known SHA-256', async () => {
+		const out = await hashAll('abc');
+		// SHA-256("abc")
+		expect(out).toContain('ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad');
 	});
 });

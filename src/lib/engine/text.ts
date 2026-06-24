@@ -60,6 +60,50 @@ export function cssMinify(input: string): string {
 		.trim();
 }
 
+/* ------------------------------- JWT ------------------------------ */
+
+/** Decode a base64url segment to a UTF-8 string. */
+function base64UrlToText(segment: string): string {
+	let b64 = segment.replace(/-/g, '+').replace(/_/g, '/');
+	while (b64.length % 4) b64 += '=';
+	const binary = atob(b64);
+	return new TextDecoder().decode(Uint8Array.from(binary, (ch) => ch.charCodeAt(0)));
+}
+
+/**
+ * Decode a JWT's header and payload (does NOT verify the signature).
+ * Returns pretty-printed JSON. Throws if the token is malformed.
+ */
+export function jwtDecode(input: string): string {
+	const parts = input.trim().split('.');
+	if (parts.length < 2) {
+		throw new Error('Not a valid JWT — expected header.payload.signature');
+	}
+	const header = JSON.parse(base64UrlToText(parts[0]));
+	const payload = JSON.parse(base64UrlToText(parts[1]));
+	return JSON.stringify({ header, payload }, null, 2);
+}
+
+/* ------------------------------ Hashes ---------------------------- */
+
+const HASH_ALGORITHMS = ['SHA-1', 'SHA-256', 'SHA-384', 'SHA-512'] as const;
+
+async function sha(algorithm: string, input: string): Promise<string> {
+	const data = new TextEncoder().encode(input);
+	const digest = await crypto.subtle.digest(algorithm, data);
+	return Array.from(new Uint8Array(digest))
+		.map((b) => b.toString(16).padStart(2, '0'))
+		.join('');
+}
+
+/** Compute all supported SHA hashes, one labelled line each. */
+export async function hashAll(input: string): Promise<string> {
+	const lines = await Promise.all(
+		HASH_ALGORITHMS.map(async (algo) => `${algo.padEnd(8)}  ${await sha(algo, input)}`)
+	);
+	return lines.join('\n');
+}
+
 /** Re-expand minified CSS into an indented, readable block. */
 export function cssBeautify(input: string): string {
 	const min = cssMinify(input);

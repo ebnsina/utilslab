@@ -105,11 +105,11 @@ export interface Tool {
 	compute?: (inputs: Inputs) => Result[];
 
 	/**
-	 * For `type: 'text'` tools — a pure string→string transform rendered by
-	 * TextTool (input on the left, live output on the right). May throw on
-	 * invalid input; the error is shown to the user.
+	 * For `type: 'text'` tools — a string→string transform rendered by
+	 * TextTool (input on the left, live output on the right). May be async
+	 * (e.g. hashing) and may throw on invalid input; the error is shown.
 	 */
-	transform?: (input: string) => string;
+	transform?: (input: string) => string | Promise<string>;
 	/** Placeholder for the text-tool input area. */
 	inputPlaceholder?: string;
 

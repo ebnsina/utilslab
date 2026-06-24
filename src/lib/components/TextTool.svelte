@@ -9,26 +9,50 @@
 	const theme = $derived(categoryTheme(tool.category));
 
 	let input = $state('');
+	let output = $state('');
+	let error = $state('');
 	let copied = $state(false);
 
-	// Live transform. Errors (invalid JSON/Base64/etc.) are caught and surfaced
-	// instead of breaking the page.
-	const result = $derived.by(() => {
-		if (!input.trim()) return { output: '', error: '' };
-		try {
-			return { output: tool.transform!(input), error: '' };
-		} catch (e) {
-			return { output: '', error: e instanceof Error ? e.message : 'Could not process input' };
+	const msg = (e: unknown) => (e instanceof Error ? e.message : 'Could not process input');
+
+	// Live transform — supports sync and async (e.g. hashing) transforms.
+	// Errors (invalid JSON/Base64/etc.) are caught and surfaced.
+	$effect(() => {
+		const value = input;
+		if (!value.trim()) {
+			output = '';
+			error = '';
+			return;
 		}
+		let cancelled = false;
+		try {
+			const r = tool.transform!(value);
+			if (r instanceof Promise) {
+				r.then((o) => !cancelled && ((output = o), (error = ''))).catch(
+					(e) => !cancelled && ((output = ''), (error = msg(e)))
+				);
+			} else {
+				output = r;
+				error = '';
+			}
+		} catch (e) {
+			output = '';
+			error = msg(e);
+		}
+		return () => {
+			cancelled = true;
+		};
 	});
+
+	const result = $derived({ output, error });
 
 	// Help avoid "is it broken?" confusion when a transform is a no-op
 	// (e.g. decoding text that wasn't encoded in the first place).
-	const unchanged = $derived(!result.error && result.output !== '' && result.output === input);
+	const unchanged = $derived(!error && output !== '' && output === input);
 
 	async function copy() {
-		if (!result.output) return;
-		await navigator.clipboard.writeText(result.output);
+		if (!output) return;
+		await navigator.clipboard.writeText(output);
 		copied = true;
 		setTimeout(() => (copied = false), 1500);
 	}
