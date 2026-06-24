@@ -36,6 +36,18 @@ export function tdee(bmrValue: number, activityFactor: number): number {
 	return bmrValue * activityFactor;
 }
 
+/** Ideal body weight (kg) — Devine formula. */
+export function idealWeight(sex: Sex, heightCm: number): number {
+	const inchesOver5ft = Math.max(0, heightCm / 2.54 - 60);
+	const base = sex === 'male' ? 50 : 45.5;
+	return base + 2.3 * inchesOver5ft;
+}
+
+/** Recommended daily water intake (liters) ≈ 33 ml per kg of body weight. */
+export function waterIntakeLiters(weightKg: number): number {
+	return weightKg * 0.033;
+}
+
 /**
  * Body fat percentage — U.S. Navy method.
  * Circumferences in cm. `hipCm` required for females.

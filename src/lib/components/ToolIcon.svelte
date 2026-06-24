@@ -41,6 +41,15 @@
 	import CopyMinus from '@lucide/svelte/icons/copy-minus';
 	import Tally5 from '@lucide/svelte/icons/tally-5';
 	import Pilcrow from '@lucide/svelte/icons/pilcrow';
+	import Car from '@lucide/svelte/icons/car';
+	import ChartLine from '@lucide/svelte/icons/chart-line';
+	import PiggyBank from '@lucide/svelte/icons/piggy-bank';
+	import Activity from '@lucide/svelte/icons/activity';
+	import Weight from '@lucide/svelte/icons/weight';
+	import GlassWater from '@lucide/svelte/icons/glass-water';
+	import Superscript from '@lucide/svelte/icons/superscript';
+	import ChartColumn from '@lucide/svelte/icons/chart-column';
+	import TicketPercent from '@lucide/svelte/icons/ticket-percent';
 
 	// A distinct Lucide icon per tool, with a per-category fallback so new
 	// tools always render something sensible.
@@ -79,7 +88,16 @@
 		'sort-lines': ArrowDownAZ,
 		'dedupe-lines': CopyMinus,
 		'text-counter': Tally5,
-		'lorem-ipsum': Pilcrow
+		'lorem-ipsum': Pilcrow,
+		'auto-loan': Car,
+		roi: ChartLine,
+		'savings-goal': PiggyBank,
+		bmr: Activity,
+		'ideal-weight': Weight,
+		'water-intake': GlassWater,
+		quadratic: Superscript,
+		statistics: ChartColumn,
+		discount: TicketPercent
 	};
 
 	const CATEGORY_FALLBACK: Record<CategoryId, typeof House> = {

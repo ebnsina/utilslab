@@ -38,6 +38,12 @@ import {
 	textCounter
 } from './texttools';
 import { lorem } from './lorem';
+// More calculators
+import { autoLoan, roiTool, savingsGoal } from './finance-extra';
+import { bmrTool, idealWeightTool, waterIntake } from './health-extra';
+import { quadraticTool } from './math-extra';
+import { statistics } from './statistics';
+import { discount } from './discount';
 
 /** The complete catalog. Adding a calculator = import + append here. */
 export const TOOLS: Tool[] = [
@@ -75,7 +81,16 @@ export const TOOLS: Tool[] = [
 	sortLinesTool,
 	dedupeLinesTool,
 	textCounter,
-	lorem
+	lorem,
+	autoLoan,
+	roiTool,
+	savingsGoal,
+	bmrTool,
+	idealWeightTool,
+	waterIntake,
+	quadraticTool,
+	statistics,
+	discount
 ];
 
 const BY_SLUG = new Map(TOOLS.map((c) => [c.slug, c]));

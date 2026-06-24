@@ -1,7 +1,15 @@
 import { describe, it, expect } from 'vitest';
-import { monthlyPayment, amortize, futureValue } from './finance';
-import { bmi, bmr, tdee, bodyFatNavy } from './health';
-import { gcd, simplifyFraction, fractionOp, whatPercentOf, percentOf } from './math';
+import { monthlyPayment, amortize, futureValue, roi, requiredContribution } from './finance';
+import { bmi, bmr, tdee, bodyFatNavy, idealWeight, waterIntakeLiters } from './health';
+import {
+	gcd,
+	simplifyFraction,
+	fractionOp,
+	whatPercentOf,
+	percentOf,
+	quadratic,
+	stats
+} from './math';
 import { round } from './format';
 
 describe('finance', () => {
@@ -23,6 +31,15 @@ describe('finance', () => {
 	it('grows a lump sum with monthly compounding', () => {
 		// $1000 @ 5% for 10yr, monthly ≈ $1647
 		expect(round(futureValue(1000, 5, 10, 12), 0)).toBeCloseTo(1647, 0);
+	});
+
+	it('computes ROI', () => {
+		expect(roi(1000, 1250)).toBe(25);
+	});
+
+	it('finds the contribution to hit a savings goal', () => {
+		// Reaching the target from 0 at 0% is simply target/periods.
+		expect(round(requiredContribution(12000, 0, 0, 1), 2)).toBe(1000);
 	});
 });
 
@@ -47,6 +64,12 @@ describe('health', () => {
 		expect(bf).toBeGreaterThan(5);
 		expect(bf).toBeLessThan(35);
 	});
+
+	it('computes ideal weight (Devine) and water intake', () => {
+		// 175cm male ≈ 50 + 2.3*(68.9-60) ≈ 70.5kg
+		expect(round(idealWeight('male', 175), 1)).toBeCloseTo(70.5, 0);
+		expect(round(waterIntakeLiters(70), 2)).toBe(2.31);
+	});
 });
 
 describe('math', () => {
@@ -64,5 +87,18 @@ describe('math', () => {
 	it('computes percentages', () => {
 		expect(whatPercentOf(25, 200)).toBe(12.5);
 		expect(percentOf(12.5, 200)).toBe(25);
+	});
+
+	it('solves quadratics', () => {
+		// x² - 5x + 6 = 0 -> roots 3, 2
+		expect(quadratic(1, -5, 6).roots.sort()).toEqual([2, 3]);
+		// x² + 1 = 0 -> complex
+		expect(quadratic(1, 0, 1).complex).toHaveLength(2);
+	});
+
+	it('computes statistics', () => {
+		const s = stats([2, 4, 4, 4, 5, 5, 7, 9]);
+		expect(s.mean).toBe(5);
+		expect(round(s.stdevP, 4)).toBe(2);
 	});
 });

@@ -93,6 +93,31 @@ export function futureValue(
 	return fvPrincipal + fvContributions;
 }
 
+/** Return on investment as a percentage. */
+export function roi(initial: number, final: number): number {
+	return initial === 0 ? NaN : ((final - initial) / initial) * 100;
+}
+
+/**
+ * Recurring monthly contribution needed to reach a savings target.
+ * @param target goal amount
+ * @param current starting balance
+ */
+export function requiredContribution(
+	target: number,
+	current: number,
+	annualRatePct: number,
+	years: number,
+	compoundsPerYear = 12
+): number {
+	const i = annualRatePct / 100 / compoundsPerYear;
+	const periods = compoundsPerYear * years;
+	if (periods <= 0) return NaN;
+	const growth = Math.pow(1 + i, periods);
+	if (i === 0) return (target - current) / periods;
+	return (target - current * growth) / ((growth - 1) / i);
+}
+
 /** Present value of a future sum. */
 export function presentValue(
 	future: number,
