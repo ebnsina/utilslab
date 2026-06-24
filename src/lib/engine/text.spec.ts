@@ -9,7 +9,13 @@ import {
 	cssMinify,
 	cssBeautify,
 	jwtDecode,
-	hashAll
+	hashAll,
+	slugify,
+	htmlEncode,
+	htmlDecode,
+	sortLines,
+	dedupeLines,
+	toCases
 } from './text';
 
 describe('base64', () => {
@@ -78,5 +84,26 @@ describe('hash', () => {
 		const out = await hashAll('abc');
 		// SHA-256("abc")
 		expect(out).toContain('ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad');
+	});
+});
+
+describe('text utils', () => {
+	it('slugifies', () => {
+		expect(slugify('  Héllo, World! ')).toBe('hello-world');
+	});
+	it('encodes/decodes html entities', () => {
+		expect(htmlEncode('<a href="x">&')).toBe('&lt;a href=&quot;x&quot;&gt;&amp;');
+		expect(htmlDecode('&lt;a&gt; &amp; &#39;hi&#39; &#x263A;')).toBe("<a> & 'hi' ☺");
+	});
+	it('sorts and dedupes lines', () => {
+		expect(sortLines('banana\napple\ncherry')).toBe('apple\nbanana\ncherry');
+		expect(dedupeLines('a\nb\na\nc\nb')).toBe('a\nb\nc');
+	});
+	it('converts cases', () => {
+		const out = toCases('hello world');
+		expect(out).toContain('camelCase');
+		expect(out).toContain('helloWorld');
+		expect(out).toContain('hello_world');
+		expect(out).toContain('hello-world');
 	});
 });

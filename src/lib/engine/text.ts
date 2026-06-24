@@ -60,6 +60,118 @@ export function cssMinify(input: string): string {
 		.trim();
 }
 
+/* ---------------------------- Text utils -------------------------- */
+
+/** Lowercase, hyphenated, URL-safe slug. */
+export function slugify(input: string): string {
+	return input
+		.normalize('NFKD')
+		.replace(/[̀-ͯ]/g, '') // strip accents
+		.toLowerCase()
+		.trim()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-+|-+$/g, '');
+}
+
+const HTML_ENTITIES: Record<string, string> = {
+	'&': '&amp;',
+	'<': '&lt;',
+	'>': '&gt;',
+	'"': '&quot;',
+	"'": '&#39;'
+};
+
+export function htmlEncode(input: string): string {
+	return input.replace(/[&<>"']/g, (ch) => HTML_ENTITIES[ch]);
+}
+
+const HTML_NAMED: Record<string, string> = {
+	amp: '&',
+	lt: '<',
+	gt: '>',
+	quot: '"',
+	apos: "'",
+	nbsp: ' ',
+	copy: '©',
+	reg: '®'
+};
+
+export function htmlDecode(input: string): string {
+	return input.replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (m, body) => {
+		if (body[0] === '#') {
+			const code =
+				body[1] === 'x' || body[1] === 'X'
+					? parseInt(body.slice(2), 16)
+					: parseInt(body.slice(1), 10);
+			return Number.isFinite(code) ? String.fromCodePoint(code) : m;
+		}
+		return HTML_NAMED[body.toLowerCase()] ?? m;
+	});
+}
+
+/** Sort lines alphabetically (case-insensitive). */
+export function sortLines(input: string): string {
+	return input
+		.split('\n')
+		.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }))
+		.join('\n');
+}
+
+/** Remove duplicate lines, preserving first occurrence order. */
+export function dedupeLines(input: string): string {
+	const seen = new Set<string>();
+	return input
+		.split('\n')
+		.filter((line) => (seen.has(line) ? false : (seen.add(line), true)))
+		.join('\n');
+}
+
+/** Character / word / line statistics, one labelled line each. */
+export function textStats(input: string): string {
+	const chars = input.length;
+	const charsNoSpaces = input.replace(/\s/g, '').length;
+	const words = (input.trim().match(/\S+/g) ?? []).length;
+	const lines = input === '' ? 0 : input.split('\n').length;
+	const sentences = (input.match(/[.!?]+(\s|$)/g) ?? []).length;
+	return [
+		`Characters        ${chars}`,
+		`Characters (no spaces)  ${charsNoSpaces}`,
+		`Words             ${words}`,
+		`Lines             ${lines}`,
+		`Sentences         ${sentences}`
+	].join('\n');
+}
+
+/** Split a string into its constituent words for case conversion. */
+function words(input: string): string[] {
+	return (
+		input
+			.replace(/([a-z])([A-Z])/g, '$1 $2') // camelCase boundaries
+			.replace(/[_\-/.]+/g, ' ')
+			.match(/[A-Za-z0-9]+/g) ?? []
+	).map((w) => w.toLowerCase());
+}
+
+/** Convert text to every common programming/writing case, labelled. */
+export function toCases(input: string): string {
+	const w = words(input);
+	if (w.length === 0) return '';
+	const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+	const variants: [string, string][] = [
+		['UPPERCASE', input.toUpperCase()],
+		['lowercase', input.toLowerCase()],
+		['Title Case', w.map(cap).join(' ')],
+		['Sentence case', cap(w.join(' '))],
+		['camelCase', w[0] + w.slice(1).map(cap).join('')],
+		['PascalCase', w.map(cap).join('')],
+		['snake_case', w.join('_')],
+		['kebab-case', w.join('-')],
+		['CONSTANT_CASE', w.join('_').toUpperCase()]
+	];
+	const width = Math.max(...variants.map(([l]) => l.length));
+	return variants.map(([label, value]) => `${label.padEnd(width)}   ${value}`).join('\n');
+}
+
 /* ------------------------------- JWT ------------------------------ */
 
 /** Decode a base64url segment to a UTF-8 string. */

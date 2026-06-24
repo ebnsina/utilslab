@@ -33,6 +33,14 @@
 	import Clock from '@lucide/svelte/icons/clock';
 	import Pipette from '@lucide/svelte/icons/pipette';
 	import Ruler from '@lucide/svelte/icons/ruler';
+	import CaseSensitive from '@lucide/svelte/icons/case-sensitive';
+	import Link2 from '@lucide/svelte/icons/link-2';
+	import CodeXml from '@lucide/svelte/icons/code-xml';
+	import FileX from '@lucide/svelte/icons/file-x';
+	import ArrowDownAZ from '@lucide/svelte/icons/arrow-down-a-z';
+	import CopyMinus from '@lucide/svelte/icons/copy-minus';
+	import Tally5 from '@lucide/svelte/icons/tally-5';
+	import Pilcrow from '@lucide/svelte/icons/pilcrow';
 
 	// A distinct Lucide icon per tool, with a per-category fallback so new
 	// tools always render something sensible.
@@ -63,7 +71,15 @@
 		'uuid-generator': Fingerprint,
 		'timestamp-converter': Clock,
 		'color-converter': Pipette,
-		'unit-converter': Ruler
+		'unit-converter': Ruler,
+		'case-converter': CaseSensitive,
+		slugify: Link2,
+		'html-encode': CodeXml,
+		'html-decode': FileX,
+		'sort-lines': ArrowDownAZ,
+		'dedupe-lines': CopyMinus,
+		'text-counter': Tally5,
+		'lorem-ipsum': Pilcrow
 	};
 
 	const CATEGORY_FALLBACK: Record<CategoryId, typeof House> = {

@@ -28,6 +28,16 @@ import { uuid } from './uuid';
 import { timestamp } from './timestamp';
 import { color } from './color';
 import { unit } from './unit';
+import {
+	caseConverter,
+	slugifyTool,
+	htmlEncodeTool,
+	htmlDecodeTool,
+	sortLinesTool,
+	dedupeLinesTool,
+	textCounter
+} from './texttools';
+import { lorem } from './lorem';
 
 /** The complete catalog. Adding a calculator = import + append here. */
 export const TOOLS: Tool[] = [
@@ -57,7 +67,15 @@ export const TOOLS: Tool[] = [
 	uuid,
 	timestamp,
 	color,
-	unit
+	unit,
+	caseConverter,
+	slugifyTool,
+	htmlEncodeTool,
+	htmlDecodeTool,
+	sortLinesTool,
+	dedupeLinesTool,
+	textCounter,
+	lorem
 ];
 
 const BY_SLUG = new Map(TOOLS.map((c) => [c.slug, c]));
