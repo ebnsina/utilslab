@@ -1,42 +1,50 @@
-# sv
+# UtilsLab
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+> Modern tools for everyday life — a fast, free collection of financial, health, math, everyday, and developer utilities.
 
-## Creating a project
+UtilsLab is a fully static SvelteKit site bundling **49 calculators and tools** across five categories. Everything runs in the browser — no accounts, no servers, no data leaves your machine — and every page is prerendered to static HTML for instant loads and clean SEO.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Tools
 
-```sh
-# create a new project
-npx sv create my-app
-```
+- **Financial** — mortgage, loan, auto loan, compound interest, sales tax, ROI, savings goal
+- **Health & Fitness** — BMI, calorie, body fat, BMR, ideal weight, water intake, running pace
+- **Math** — scientific calculator, percentage, fraction, quadratic, statistics
+- **Everyday** — age, tip, discount, unit converter, color converter
+- **Developer** — Base64, URL & HTML encode/decode, JSON / CSS / JS / HTML / SQL / Markdown formatters, hash, JWT decoder, UUID, timestamp, case converter, slugify, sort/dedupe lines, text counter, lorem ipsum
 
-To recreate this project with the same configuration:
+Adding a tool is a one-liner: define it in `src/lib/tools/` and append it to the catalog in `src/lib/tools/registry.ts`. A generic shell renders each tool from its declarative field schema.
 
-```sh
-# recreate this project
-npx sv@0.16.1 create --template minimal --types ts --add eslint prettier vitest="usages:unit,component" tailwindcss="plugins:typography" --install npm .
-```
+## Tech stack
+
+- [SvelteKit 2](https://svelte.dev/docs/kit) + [Svelte 5](https://svelte.dev) (runes)
+- [Tailwind CSS 4](https://tailwindcss.com)
+- TypeScript, fully prerendered via `adapter-static`
+- Library-backed formatters (`js-beautify`, `sql-formatter`, `marked`, `terser`), code-split per route
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Install dependencies, then start the dev server:
 
 ```sh
+npm install
 npm run dev
 
-# or start the server and open the app in a new browser tab
+# or open the app in a new browser tab
 npm run dev -- --open
 ```
 
 ## Building
 
-To create a production version of your app:
-
 ```sh
-npm run build
+npm run build      # produce the static production build
+npm run preview    # preview the build locally
 ```
 
-You can preview the production build with `npm run preview`.
+## Quality checks
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```sh
+npm run check      # svelte-check (types)
+npm run lint       # prettier + eslint
+npm run format     # prettier --write
+npm run test       # vitest
+```
