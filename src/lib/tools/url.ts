@@ -10,7 +10,8 @@ export const urlEncodeTool: Tool = {
 	keywords: ['url', 'encode', 'percent', 'uri', 'encodeURIComponent'],
 	featured: true,
 	transform: urlEncode,
-	inputPlaceholder: 'Type or paste text to encode…'
+	inputPlaceholder: 'Type or paste text to encode…',
+	reverse: 'url-decode'
 };
 
 export const urlDecodeTool: Tool = {
@@ -21,5 +22,6 @@ export const urlDecodeTool: Tool = {
 	description: 'Decode percent-encoded URL text.',
 	keywords: ['url', 'decode', 'percent', 'uri', 'decodeURIComponent'],
 	transform: urlDecode,
-	inputPlaceholder: 'Paste URL-encoded text to decode…'
+	inputPlaceholder: 'Paste URL-encoded text to decode…',
+	reverse: 'url-encode'
 };

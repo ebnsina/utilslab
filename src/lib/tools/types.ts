@@ -112,6 +112,12 @@ export interface Tool {
 	transform?: (input: string) => string | Promise<string>;
 	/** Placeholder for the text-tool input area. */
 	inputPlaceholder?: string;
+	/**
+	 * Slug of the inverse text tool (e.g. css-minify ↔ css-beautify). When set,
+	 * TextTool shows a "Reverse" button that hops to it, carrying the current
+	 * output across as the new input.
+	 */
+	reverse?: string;
 
 	/**
 	 * Escape hatch for calculators that don't fit the generic form

@@ -10,7 +10,8 @@ export const jsonBeautifyTool: Tool = {
 	keywords: ['json', 'beautify', 'format', 'pretty', 'indent'],
 	featured: true,
 	transform: jsonBeautify,
-	inputPlaceholder: 'Paste JSON to format…'
+	inputPlaceholder: 'Paste JSON to format…',
+	reverse: 'json-minify'
 };
 
 export const jsonMinifyTool: Tool = {
@@ -21,5 +22,6 @@ export const jsonMinifyTool: Tool = {
 	description: 'Collapse JSON into a single compact line.',
 	keywords: ['json', 'minify', 'compact', 'compress'],
 	transform: jsonMinify,
-	inputPlaceholder: 'Paste JSON to minify…'
+	inputPlaceholder: 'Paste JSON to minify…',
+	reverse: 'json-beautify'
 };

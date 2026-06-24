@@ -40,7 +40,8 @@ export const htmlEncodeTool: Tool = {
 	description: 'Escape special characters into HTML entities.',
 	keywords: ['html', 'encode', 'entities', 'escape'],
 	transform: htmlEncode,
-	inputPlaceholder: 'Paste HTML/text to escape…'
+	inputPlaceholder: 'Paste HTML/text to escape…',
+	reverse: 'html-decode'
 };
 
 export const htmlDecodeTool: Tool = {
@@ -51,7 +52,8 @@ export const htmlDecodeTool: Tool = {
 	description: 'Convert HTML entities back into readable characters.',
 	keywords: ['html', 'decode', 'entities', 'unescape'],
 	transform: htmlDecode,
-	inputPlaceholder: 'Paste text with &amp; entities…'
+	inputPlaceholder: 'Paste text with &amp; entities…',
+	reverse: 'html-encode'
 };
 
 export const sortLinesTool: Tool = {

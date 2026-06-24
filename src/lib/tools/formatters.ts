@@ -15,6 +15,7 @@ export const jsBeautify: Tool = {
 	keywords: ['javascript', 'js', 'beautify', 'format', 'pretty', 'indent'],
 	featured: true,
 	inputPlaceholder: 'Paste JavaScript to format…',
+	reverse: 'js-minify',
 	transform: async (input) => {
 		const jb = (await import('js-beautify')).default;
 		return jb.js(input, { indent_size: 2 });
@@ -29,6 +30,7 @@ export const jsMinify: Tool = {
 	description: 'Compress JavaScript by removing whitespace and shortening code (Terser).',
 	keywords: ['javascript', 'js', 'minify', 'compress', 'uglify', 'terser'],
 	inputPlaceholder: 'Paste JavaScript to minify…',
+	reverse: 'js-beautify',
 	transform: async (input) => {
 		const { minify } = await import('terser');
 		const result = await minify(input);

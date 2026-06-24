@@ -30,7 +30,7 @@
 </script>
 
 <div class="grid items-start gap-6 lg:grid-cols-[minmax(0,360px)_1fr]">
-	<section class="rounded-card border border-border bg-surface p-5 sm:p-6">
+	<section class="min-w-0 rounded-card border border-border bg-surface p-5 sm:p-6">
 		<h2 class="tag mb-4 text-sm text-math">Numbers</h2>
 		<textarea
 			bind:value={raw}
@@ -40,7 +40,7 @@
 		<p class="mt-2 text-xs text-ink-muted">{values.length} valid numbers</p>
 	</section>
 
-	<section class="rounded-card border border-border bg-surface p-5 sm:p-6">
+	<section class="min-w-0 rounded-card border border-border bg-surface p-5 sm:p-6">
 		<h2 class="tag mb-4 text-sm text-math">Results</h2>
 		{#if cards.length}
 			<div class="grid gap-3 sm:grid-cols-2">

@@ -10,7 +10,8 @@ export const base64EncodeTool: Tool = {
 	keywords: ['base64', 'encode', 'btoa', 'binary'],
 	featured: true,
 	transform: base64Encode,
-	inputPlaceholder: 'Type or paste text to encode…'
+	inputPlaceholder: 'Type or paste text to encode…',
+	reverse: 'base64-decode'
 };
 
 export const base64DecodeTool: Tool = {
@@ -21,5 +22,6 @@ export const base64DecodeTool: Tool = {
 	description: 'Decode Base64 back to readable text.',
 	keywords: ['base64', 'decode', 'atob'],
 	transform: base64Decode,
-	inputPlaceholder: 'Paste Base64 to decode…'
+	inputPlaceholder: 'Paste Base64 to decode…',
+	reverse: 'base64-encode'
 };

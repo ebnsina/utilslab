@@ -9,7 +9,8 @@ export const cssMinifyTool: Tool = {
 	description: 'Strip comments and whitespace to shrink CSS.',
 	keywords: ['css', 'minify', 'compress', 'whitespace'],
 	transform: cssMinify,
-	inputPlaceholder: 'Paste CSS to minify…'
+	inputPlaceholder: 'Paste CSS to minify…',
+	reverse: 'css-beautify'
 };
 
 export const cssBeautifyTool: Tool = {
@@ -20,5 +21,6 @@ export const cssBeautifyTool: Tool = {
 	description: 'Reformat minified CSS into a readable, indented block.',
 	keywords: ['css', 'beautify', 'format', 'pretty', 'indent'],
 	transform: cssBeautify,
-	inputPlaceholder: 'Paste CSS to format…'
+	inputPlaceholder: 'Paste CSS to format…',
+	reverse: 'css-minify'
 };

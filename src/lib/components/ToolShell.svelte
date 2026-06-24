@@ -25,7 +25,7 @@
 
 <div class="grid items-start gap-6 lg:grid-cols-[minmax(0,360px)_1fr]">
 	<!-- Inputs -->
-	<section class="rounded-card border border-border bg-surface p-5 sm:p-6">
+	<section class="min-w-0 rounded-card border border-border bg-surface p-5 sm:p-6">
 		<h2 class="tag mb-4 text-sm {theme.text}">Inputs</h2>
 		<div class="space-y-4">
 			{#each def.fields ?? [] as field (field.name)}
@@ -35,7 +35,7 @@
 	</section>
 
 	<!-- Results -->
-	<section class="rounded-card border border-border bg-surface p-5 sm:p-6">
+	<section class="min-w-0 rounded-card border border-border bg-surface p-5 sm:p-6">
 		<h2 class="tag mb-4 text-sm {theme.text}">Results</h2>
 
 		<div class="grid gap-3 sm:grid-cols-2">
