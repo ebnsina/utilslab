@@ -44,6 +44,8 @@ import { bmrTool, idealWeightTool, waterIntake } from './health-extra';
 import { quadraticTool } from './math-extra';
 import { statistics } from './statistics';
 import { discount } from './discount';
+// Formatters (library-backed, code-split)
+import { jsBeautify, jsMinify, htmlBeautify, sqlFormatter, markdownToHtml } from './formatters';
 
 /** The complete catalog. Adding a calculator = import + append here. */
 export const TOOLS: Tool[] = [
@@ -90,7 +92,12 @@ export const TOOLS: Tool[] = [
 	waterIntake,
 	quadraticTool,
 	statistics,
-	discount
+	discount,
+	jsBeautify,
+	jsMinify,
+	htmlBeautify,
+	sqlFormatter,
+	markdownToHtml
 ];
 
 const BY_SLUG = new Map(TOOLS.map((c) => [c.slug, c]));

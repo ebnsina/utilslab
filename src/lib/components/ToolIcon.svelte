@@ -50,6 +50,11 @@
 	import Superscript from '@lucide/svelte/icons/superscript';
 	import ChartColumn from '@lucide/svelte/icons/chart-column';
 	import TicketPercent from '@lucide/svelte/icons/ticket-percent';
+	import Braces2 from '@lucide/svelte/icons/file-code-2';
+	import FileMinus from '@lucide/svelte/icons/file-minus';
+	import FileCode from '@lucide/svelte/icons/file-code';
+	import Database from '@lucide/svelte/icons/database';
+	import FileType from '@lucide/svelte/icons/file-type';
 
 	// A distinct Lucide icon per tool, with a per-category fallback so new
 	// tools always render something sensible.
@@ -97,7 +102,12 @@
 		'water-intake': GlassWater,
 		quadratic: Superscript,
 		statistics: ChartColumn,
-		discount: TicketPercent
+		discount: TicketPercent,
+		'js-beautify': Braces2,
+		'js-minify': FileMinus,
+		'html-beautify': FileCode,
+		'sql-formatter': Database,
+		'markdown-to-html': FileType
 	};
 
 	const CATEGORY_FALLBACK: Record<CategoryId, typeof House> = {
