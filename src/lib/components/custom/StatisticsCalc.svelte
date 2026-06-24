@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { stats } from '$lib/engine/math';
 	import { number } from '$lib/engine/format';
+	import ResultStat from '../results/ResultStat.svelte';
 
 	let raw = $state('2, 4, 4, 4, 5, 5, 7, 9');
 
@@ -44,20 +45,9 @@
 		{#if cards.length}
 			<div class="grid gap-3 sm:grid-cols-2">
 				{#each cards as c (c.label)}
-					<div
-						class="rounded-2xl border border-border p-4 {c.primary
-							? 'border-brand bg-brand/10'
-							: 'bg-surface-2'}"
-					>
-						<div class="text-sm text-ink-muted">{c.label}</div>
-						<div
-							class="mt-1 font-display font-bold tabular-nums tracking-tight {c.primary
-								? 'text-3xl text-brand'
-								: 'text-2xl text-ink'}"
-						>
-							{c.value}
-						</div>
-					</div>
+					<ResultStat
+						result={{ kind: 'stat', label: c.label, value: c.value, primary: c.primary }}
+					/>
 				{/each}
 			</div>
 		{:else}

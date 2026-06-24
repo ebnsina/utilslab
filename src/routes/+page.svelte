@@ -6,9 +6,13 @@
 	import CategoryIcon from '$lib/components/CategoryIcon.svelte';
 	import ToolCard from '$lib/components/ToolCard.svelte';
 
-	const featured = featuredTools();
-	// First category gets the hero footprint, the rest are standard tiles.
-	const sizes = ['hero', 'sm', 'wide', 'sm', 'wide'] as const;
+	// Interleave featured tools round-robin by category so no single category
+	// (e.g. calculators) dominates the Popular row — every type gets equal billing.
+	const byCategory = CATEGORY_ORDER.map((id) => featuredTools().filter((t) => t.category === id));
+	const featured: ReturnType<typeof featuredTools> = [];
+	for (let i = 0; byCategory.some((arr) => arr[i]); i++) {
+		for (const arr of byCategory) if (arr[i]) featured.push(arr[i]);
+	}
 </script>
 
 <svelte:head>
@@ -29,25 +33,21 @@
 	</p>
 </section>
 
-<!-- Category bento -->
+<!-- Categories — every category gets equal billing -->
 <section class="mb-12">
-	<div
-		class="grid auto-rows-[minmax(140px,auto)] grid-flow-row-dense grid-cols-2 gap-4 sm:grid-cols-3"
-	>
-		{#each CATEGORY_ORDER as id, i (id)}
+	<div class="grid auto-rows-[minmax(150px,auto)] grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+		{#each CATEGORY_ORDER as id (id)}
 			{@const theme = categoryTheme(id)}
 			{@const count = toolsByCategory(id).length}
 			<BentoCard
 				href={resolve('/[category=category]', { category: id })}
 				colorClass={theme.bg}
 				inkClass={theme.ink}
-				size={sizes[i]}
 			>
 				<CategoryIcon category={id} class="size-7 opacity-90" />
 				<div class="mt-auto">
-					<h2 class="text-2xl font-bold">{theme.name}</h2>
-					<p class="mt-1 max-w-xs text-sm opacity-80">{theme.tagline}</p>
-					<p class="mt-3 text-sm font-medium opacity-70">{count} tools →</p>
+					<h2 class="text-xl font-bold">{theme.name}</h2>
+					<p class="mt-2 text-sm font-medium opacity-70">{count} tools →</p>
 				</div>
 			</BentoCard>
 		{/each}
